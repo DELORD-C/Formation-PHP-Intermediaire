@@ -12,18 +12,18 @@ class Voiture {
         $this->moteur = $moteur;
     }
 
-    function getPrix ()
+    function getPrix (): Int
     {
         return $this->prix;
     }
 
-    function setPrix (Int $prix)
+    function setPrix (Int $prix): Void
     {
         $this->prix = $prix;
     }
+
+    static function vroom (): Void
+    {
+        echo 'VROOM !';
+    }
 }
-
-$voiture1 = new Voiture("Ferrari", 250000, "V12");
-$voiture1->marque = 'Mercedes';
-
-var_dump($voiture1->getPrix());
