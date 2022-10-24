@@ -26,4 +26,11 @@ class Voiture {
     {
         echo 'VROOM !';
     }
+
+    function __destruct()
+    {
+        echo 'Script terminé !';
+    }
 }
+
+$test = new Voiture('Renault', 10000, 'V12');

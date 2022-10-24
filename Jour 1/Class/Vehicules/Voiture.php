@@ -1,5 +1,7 @@
 <?php
 
+namespace Vehicules;
+
 class Voiture extends Vehicule {
     private $prix;
     private $moteur;

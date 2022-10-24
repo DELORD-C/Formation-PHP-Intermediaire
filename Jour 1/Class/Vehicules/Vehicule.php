@@ -1,5 +1,7 @@
 <?php
 
+namespace Vehicules;
+
 class Vehicule {
     public $marque;
     const TVA = "20%";
