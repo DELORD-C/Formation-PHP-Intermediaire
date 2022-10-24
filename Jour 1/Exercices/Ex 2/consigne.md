@@ -2,7 +2,7 @@
 
 ## 1
 
-Tous les attributs utilisés doivent être définis comme privé.
+Tous les attributs utilisés doivent être définis comme protected.
 
 Créer 3 classes
 
