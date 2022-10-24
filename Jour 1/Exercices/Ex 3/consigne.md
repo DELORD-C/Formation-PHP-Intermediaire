@@ -24,7 +24,7 @@ Ajouter une méthode wheeling() à Moto qui retourne la phrase : "[NOM DU VEHICU
 
 Ajouter une méthode crash() à VehiculeVolant qui retourne la phrase :"[NOM DU VEHICULE] s'est crashé(e) !"
 
-Ajouter une méthode coule()à Bateauqui retourne la phrase : [NOM DU VEHICULE] à coulé(e)"
+Ajouter une méthode coule()à Bateauqui retourne la phrase : [NOM DU VEHICULE] a coulé(e)"
 
 Surcharger la méthode accélérer()dans Avion afin que celle-ci multiplie la $vitesse par $acceleration (attention il faudra mettre une condition pour que la vitesse ne reste pas à 0 au départ);
 
