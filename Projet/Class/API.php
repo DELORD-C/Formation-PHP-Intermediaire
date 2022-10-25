@@ -7,4 +7,10 @@ class API {
         $filmList = $response->results;
         return $filmList;
     }
+
+    function getFilm() {
+        $json = file_get_contents('https://api.themoviedb.org/3/movie/' . $_GET['id'] . '?api_key=625b3e1220c0fca7c7ac7f6fcca786ac&language=fr-FR');
+        $response = json_decode($json);
+        return $response;
+    }
 }

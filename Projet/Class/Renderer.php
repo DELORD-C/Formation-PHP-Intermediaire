@@ -21,4 +21,11 @@ class Renderer {
         $filmsList = $this->htmlGenerator->generateFilmList($films);
         echo str_replace('{{FILMS}}', $filmsList, $template);
     }
+
+    function displayDetails() {
+        $details = $this->api->getFilm();
+        $template = file_get_contents(__DIR__ . '/../Templates/details.html');
+        $detailsHtml = $this->htmlGenerator->generateFilmDetails($details);
+        echo str_replace('{{DETAILS}}', $detailsHtml, $template);
+    }
 }
