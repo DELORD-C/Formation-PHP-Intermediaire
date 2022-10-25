@@ -5,10 +5,12 @@ class Article {
     protected $sujet;
     protected $dateCreation;
     protected $utilisateur;
+    protected $categorie;
     protected $commentaires = [];
 
-    function __construct(String $contenu, String $sujet, Utilisateur $utilisateur)
+    function __construct(String $contenu, String $sujet, Utilisateur $utilisateur, Catégorie $categorie)
     {
+        $this->categorie = $categorie;
         $this->contenu = $contenu;
         $this->sujet = $sujet;
         $this->dateCreation = new DateTime();

@@ -16,4 +16,8 @@ class Utilisateur {
         $commentaire = new Commentaire($this, $content);
         $article->ajouterCommentaire($commentaire);
     }
+
+    function like(Commentaire $commentaire) {
+        $commentaire->ajouterLike(new Like($this));
+    }
 }
