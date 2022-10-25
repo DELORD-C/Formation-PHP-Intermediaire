@@ -16,4 +16,8 @@ class Controller {
             $this->renderer->displayForm();
         }
     }
+
+    function details () {
+        
+    }
 }

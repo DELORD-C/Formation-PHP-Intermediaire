@@ -13,9 +13,10 @@ class HTMLGenerator {
             $filmshtml .= "
                 <tr>
                     <td>$film->original_title</td>
-                    <td>$film->poster_path</td>
+                    <td><img src='https://image.tmdb.org/t/p/w500$film->poster_path'></td>
                     <td>$date</td>
                     <td>$film->overview</td>
+                    <td><a href='details.php?id=$film->id'>Voir</a></td>
                 </tr>
             ";
         }
