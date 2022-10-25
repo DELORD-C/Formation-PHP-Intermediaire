@@ -4,18 +4,29 @@ class Article {
     protected $contenu;
     protected $sujet;
     protected $dateCreation;
-    protected $client;
+    protected $utilisateur;
+    protected $commentaires = [];
 
-    function __construct(String $contenu, String $sujet, DateTime $dateCreation, Client $client)
+    function __construct(String $contenu, String $sujet, Utilisateur $utilisateur)
     {
         $this->contenu = $contenu;
         $this->sujet = $sujet;
-        $this->dateCreation = $dateCreation;
-        $this->client = $client;
+        $this->dateCreation = new DateTime();
+        $this->utilisateur = $utilisateur;
     }
 
-    function getClient(): Client
+    function getUtilisateur(): Utilisateur
     {
-        return $this->client;
+        return $this->utilisateur;
+    }
+
+    function ajouterCommentaire(Commentaire $commentaire): Void
+    {
+        array_push($this->commentaires, $commentaire);
+    }
+
+    function getCommentaires():Array
+    {
+        return $this->commentaires;
     }
 }

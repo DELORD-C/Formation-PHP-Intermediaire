@@ -1,15 +1,18 @@
 <?php
 
 include 'Class/Article.php';
-include 'Class/Client.php';
+include 'Class/Utilisateur.php';
+include 'Class/Commentaire.php';
 
-$date = new DateTime();
-
-$client = new Client ('Jean', 'jean@aol.fr', 'azerty123');
+$utilisateur = new Utilisateur ('Jean', 'jean@aol.fr', 'azerty123');
 $article = new Article(
     'Ceci est un super article',
     'Mon premier article',
-    $date,
-    $client
+    $utilisateur
 );
-var_dump($article->getClient());
+$utilisateur2 = new Utilisateur ('Basil', 'basil@aol.fr', 'poimlkpoimlk');
+
+$utilisateur2->commentaire($article, "C'est un super article !");
+$utilisateur2->commentaire($article, "Je l'ai lu plein de fois !");
+
+var_dump($article->getCommentaires());
