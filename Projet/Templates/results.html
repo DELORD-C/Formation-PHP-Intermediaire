@@ -6,25 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyMovie</title>
     <link rel="stylesheet" href="vendor\twbs\bootstrap\dist\css\bootstrap.min.css">
+    <style>
+        a {
+            color: black;
+            text-decoration: none;
+        }
+    </style>
 </head>
-<body>
-    <form>
-        <input type="text" name="query">
-        <input type="submit" value="Search">
+<body class="p-4">
+    <form class="d-flex justify-content-center align-items-center">
+        <div class="input-group mb-3 w-50">
+            <input type="text" name="query" class="form-control" placeholder="Recherche" aria-label="Recherche" aria-describedby="button-addon2">
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Rechercher</button>
+        </div>
     </form>
-    <table>
-        <thead>
-            <tr>
-                <th>Titre</th>
-                <th>Image</th>
-                <th>Date</th>
-                <th>Resumé</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{FILMS}}
-        </tbody>
-    </table>
+    <div class="d-flex justify-content-center align-items-start" style="flex-flow: wrap; gap: 20px">
+        {{FILMS}}
+    </div>
 </body>
 </html>
