@@ -11,7 +11,7 @@ class Controller {
 
     function start() {
         // Si il y a un paramètre 'query' en GET
-        if (isset($_GET['query'])) {
+        if (isset($_GET['query']) && $_GET['query'] != '') {
             // On appelle la méthode displayResults du renderer
             $this->renderer->displayResults();
         }
