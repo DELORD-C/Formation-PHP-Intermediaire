@@ -3,16 +3,44 @@
 namespace Entities;
 
 class Post {
+    protected $id;
     protected $subject;
     protected $content;
     protected $topic;
     protected $author;
 
-    function __construct(String $subject, String $content, Topic $topic, String $author)
+    function getId(): Int
     {
-        $this->subject = $subject;
-        $this->content = $content;
+        return $this->id;
+    }
+
+    function getTopic()
+    {
+        return $this->topic;
+    }
+
+    function setTopic(Topic $topic): Void
+    {
         $this->topic = $topic;
-        $this->author = $author;
+    }
+
+    function getSubject(): String
+    {
+        return $this->subject;
+    }
+
+    function getContent(): String
+    {
+        return $this->content;
+    }
+
+    function getAuthor()
+    {
+        return $this->author;
+    }
+
+    function setAuthor(User $user): Void
+    {
+        $this->author = $user;
     }
 }

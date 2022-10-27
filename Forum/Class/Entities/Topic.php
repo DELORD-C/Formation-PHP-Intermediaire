@@ -3,10 +3,12 @@
 namespace Entities;
 
 class Topic {
+    protected $id;
     protected $name;
-    function __construct(String $name)
+
+    function getId(): String
     {
-        $this->name = $name;
+        return $this->id;
     }
 
     function getName(): String

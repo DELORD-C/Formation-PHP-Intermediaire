@@ -3,13 +3,15 @@
 class Controller {
     private $renderer;
     private $auth;
+    private $orm;
 
     function __construct()
     {
         session_start();
         //On stocke un objet renderer dans l'attribut renderer pour pouvoir y accéder facilement
-        $this->renderer = new Renderer();
-        $this->auth = new Auth();
+        $this->orm = new ORM();
+        $this->renderer = new Renderer($this->orm);
+        $this->auth = new Auth($this->orm);
     }
 
     function login (): Void
@@ -27,12 +29,20 @@ class Controller {
 
     function homepage (): Void
     {
-        if ($this->auth->isLoggedIn()) {
-            $this->renderer->render('homepage');
-        }
-        else {
-            header('location: index.php');
-        }
+        $this->auth->redirectUnlessLoggedIn();
+        $this->renderer->render('homepage');
+    }
+
+    function topic (): Void
+    {
+        $this->auth->redirectUnlessLoggedIn();
+        $this->renderer->render('topic');
+    }
+
+    function post (): Void
+    {
+        $this->auth->redirectUnlessLoggedIn();
+        $this->renderer->render('post');
     }
 
     function logout (): Void
