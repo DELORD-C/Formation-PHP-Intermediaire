@@ -2,4 +2,4 @@
 
 2. Appliquer du style bootstrap sur toutes les pages.
 
-3. Ajouter la possibilité de laisser et voir des commentiares sur les posts.
+3. Ajouter la possibilité de laisser et voir des commentaires sur les posts.

@@ -9,7 +9,7 @@ class Auth {
 
     function isLoggedIn(): Bool
     {
-        if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 'true') {
+        if (isset($_SESSION['loggedIn'])) {
             return true;
         }
         return false;
@@ -17,7 +17,7 @@ class Auth {
 
     function redirectUnlessLoggedIn()
     {
-        if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 'true') {
+        if (isset($_SESSION['loggedIn'])) {
             return true;
         }
         header('location: index.php');
@@ -26,8 +26,9 @@ class Auth {
     function checkLoginPost(): Bool
     {
         if (isset($_POST['email']) && isset($_POST['password'])) {
-            if ($this->orm->getUserByEmailAndPassword($_POST['email'], $_POST['password'])) {
-                $_SESSION['loggedIn'] = 'true';
+            $id = $this->orm->getUserByEmailAndPassword($_POST['email'], $_POST['password']);
+            if ($id) {
+                $_SESSION['loggedIn'] = $id['id'];
                 return true;
             }
         }

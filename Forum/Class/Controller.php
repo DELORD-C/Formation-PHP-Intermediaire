@@ -50,4 +50,23 @@ class Controller {
         session_destroy();
         header('location: index.php');
     }
+
+    function newPost (): Void
+    {
+        $this->auth->redirectUnlessLoggedIn();
+        if (
+            isset($_POST['content']) && 
+            isset($_POST['subject']) &&
+            isset($_POST['topic']) &&
+            !empty($_POST['content']) &&
+            !empty($_POST['subject']) &&
+            !empty($_POST['topic'])
+        ) {
+            $this->orm->newPost($_POST['content'], $_POST['subject'], $_POST['topic']);
+            header('location: homepage.php');
+        }
+        else {
+            $this->renderer->render('newPost');
+        }
+    }
 }

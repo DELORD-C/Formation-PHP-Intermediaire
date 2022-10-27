@@ -17,14 +17,14 @@ class Renderer {
             case 'homepage':
                 $topics = $this->orm->getTopics();
                 $html = $this->htmlGenerator->topicList($topics);
-                $search = '{{TOPICS}}';
+                $template = str_replace('{{TOPICS}}', $html, $template);
                 break;
 
             case 'topic':
                 $topic = $this->orm->getTopic($_GET['name']);
                 $posts = $this->orm->getPosts($topic);
                 $html = $this->htmlGenerator->topic($posts);
-                $search = '{{POSTS}}';
+                $template = str_replace('{{POSTS}}', $html, $template);
                 break;
             case 'post':
                 $post = $this->orm->getPost($_GET['id']);
@@ -33,13 +33,11 @@ class Renderer {
                 $post->setAuthor($this->orm->getUserById($post->getAuthor()));
                 $html = $this->htmlGenerator->post($post);
                 $template = str_replace('{{TOPICNAME}}', $post->getTopic()->getName(), $template);
-                $search = '{{POST}}';
+                $template = str_replace('{{POST}}', $html, $template);
                 break;
             default:
-                $html = '';
-                $search = '';
                 break;
         }
-        echo str_replace($search, $html, $template);
+        echo $template;
     }
 }

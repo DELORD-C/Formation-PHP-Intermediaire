@@ -85,4 +85,29 @@ class ORM {
         $query->setFetchMode(PDO::FETCH_CLASS, 'Entities\User');
         return $query->fetch();
     }
+
+    function newPost (String $content, String $subject, String $topicName) {
+        $author = $_SESSION['loggedIn'];
+        $topic = $this->getTopic($topicName);
+        if ($topic) {
+            $topicId = $topic->getId();
+        }
+        else {
+            $topicId = $this->newTopic($topicName);
+        }
+        $query = $this->pdo->prepare("INSERT INTO posts (topic, subject, content, author) VALUES (:topic, :subject, :content, :author)");
+        $query->bindParam('topic', $topicId);
+        $query->bindParam('subject', $subject);
+        $query->bindParam('content', $content);
+        $query->bindParam('author', $author);
+        $query->execute();
+    }
+
+    function newTopic (String $topicName): Int
+    {
+        $query = $this->pdo->prepare("INSERT INTO topics (name) VALUES (:name)");
+        $query->bindParam('name', $topicName);
+        $query->execute();
+        return $this->pdo->lastInsertId();
+    }
 }
