@@ -1,19 +1,15 @@
-1. Ajouter une page pour créer un Post, l'auteur sera l'utilisateur connecté.
-
-2. Appliquer du style bootstrap sur toutes les pages.
-
-3. Ajouter la possibilité de laisser et voir des commentaires sur les posts.
-    - Modifier le template `post.html` pour ajouter un formulaire de commentaire
-    - Créer une classe `Commentaire` avec comme champs :
+1. Ajouter la possibilité de laisser et voir des likes sur les commentaires.
+    - Modifier le template `post.html` pour ajouter un bouton (formulaire avec champ input hidden) de like sur les commentaires
+    - Créer une classe `Like` avec comme champs :
         - id (Int)
-        - post (Int)
+        - comment (Int)
         - author (Int)
-        - content (String)
-    - Ajouter une table commentaire à la db
+    - Ajouter une table like à la db
     - Traiter le formulaire si il est soumis sur la page post.php = `controller->post()`
-        - Créer une condition, si un formulaire à été soumis, ajouter le commentaire à la database. puis afficher le post normalement.
-    - Modifier le template `post.html` pour ajouter un endroit ou afficher les commentaires du post `{{COMMENTS}}`
-    - Modifier la méthode `render` de la classe `Renderer` :
-      - Ajouter une méthode `getComments(Post $post ou Int $postId)` à la classe `ORM` qui renvoi tous les commentaires du post
-      - Ajouter une méthode `comments(Array $comments)` à la classe `HTMLGenerator` qui renvoi la liste des commentaires au format html
-      - Remplacer `{{COMMENTS}}` dans le template
+        - Créer une condition, si un formulaire à été soumis, ajouter le like à la database. puis afficher le post normalement.
+
+2. Le nombre de like doit s'afficher à coté de chaque commentaire
+   - Modifier la méthode html generator pour ajouter le nombre de like. 
+     - (Nous allons avoir besoin de récupérer cette donnée)
+
+3. Un utilisateur ne peut liker un commentaire qu'une seule fois

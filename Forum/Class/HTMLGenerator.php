@@ -38,7 +38,11 @@ class HTMLGenerator {
     {
         $finalString = '<ul>';
         foreach ($comments as $comment) {
-            $finalString .= '<li>' . $comment->getAuthor()->getEmail() . ' : ' . $comment->getContent() . '</li>';
+            $finalString .= '<li>' . $comment->getAuthor()->getEmail() . ' : ' . $comment->getContent() . '</li>' .
+            "<form method='post'>
+                <input type='hidden' name='likeComment' value='" . $comment->getId() . "'>
+                <input type='submit' value='<3'>
+            </form>";
         }
         $finalString .= '</ul>';
         return $finalString;
