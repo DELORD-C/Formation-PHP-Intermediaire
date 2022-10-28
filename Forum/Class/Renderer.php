@@ -29,8 +29,6 @@ class Renderer {
             case 'post':
                 //Récupération du post
                 $post = $this->orm->getPost($_GET['id']);
-                $post->setTopic($this->orm->getTopicById($post->getTopic()));
-                $post->setAuthor($this->orm->getUserById($post->getAuthor()));
                 $html = $this->htmlGenerator->post($post);
                 $template = str_replace('{{TOPICNAME}}', $post->getTopic()->getName(), $template);
                 $template = str_replace('{{POST}}', $html, $template);

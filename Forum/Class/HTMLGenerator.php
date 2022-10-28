@@ -3,13 +3,6 @@
 use Entities\Post;
 
 class HTMLGenerator {
-    protected $orm;
-
-    function __construct(ORM $orm)
-    {
-        $this->orm = $orm;
-    }
-
     function topicList (Array $topics): String
     {
         $finalString = '';
@@ -45,14 +38,14 @@ class HTMLGenerator {
     {
         $finalString = '<ul>';
         foreach ($comments as $comment) {
-            if ($this->orm->getLikeByAuthorAndComment($_SESSION['loggedIn'], $comment->getId())) {
-                $button = 'Dislike';
-            }
-            else {
-                $button = 'Like <3';
+            $button = 'Like <3';
+            foreach ($comment->getLikes() as $like) {            
+                if ($like->getAuthor() == $_SESSION['loggedIn']) {
+                    $button = 'Dislike';
+                }
             }
             $finalString .= '<li>' . $comment->getAuthor()->getEmail() . ' : ' . $comment->getContent() . "
-                <span>Likes : " . $comment->getNbLikes() . "</span>
+                <span>Likes : " . count($comment->getLikes()) . "</span>
                 <form method='post'>
                     <input type='hidden' name='likeComment' value='" . $comment->getId() . "'>
                     <input type='submit' value='$button'>

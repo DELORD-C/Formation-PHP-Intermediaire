@@ -7,7 +7,16 @@ class Comment {
     protected $content;
     protected $author;
     protected $post;
-    protected $nbLikes;
+    protected $likes;
+
+    function getLikes(): Array
+    {
+        return $this->likes;
+    }
+
+    function setLikes(?Array $likes) {
+        $this->likes = $likes;
+    }
 
     function getId() {
         return $this->id;
@@ -27,13 +36,5 @@ class Comment {
 
     function setAuthor ($author) {
         $this->author = $author;
-    }
-
-    function setNbLikes ($nbLikes) {
-        $this->nbLikes = $nbLikes;
-    }
-
-    function getNbLikes () {
-        return $this->nbLikes;
     }
 }

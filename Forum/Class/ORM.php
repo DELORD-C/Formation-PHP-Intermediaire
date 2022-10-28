@@ -60,7 +60,10 @@ class ORM {
         $query->bindParam('id', $id);
         $query->execute();
         $query->setFetchMode(PDO::FETCH_CLASS, 'Entities\Post');
-        return $query->fetch();
+        $post = $query->fetch();
+        $post->setTopic($this->orm->getTopicById($post->getTopic()));
+        $post->setAuthor($this->orm->getUserById($post->getAuthor()));
+        return $post;
     }
 
     function getUserByEmailAndPassword(String $email, String $password)
@@ -127,7 +130,7 @@ class ORM {
             if ($results) {
                 foreach ($results as $comment) {
                     $comment->setAuthor($this->getUserById($comment->getAuthor()));
-                    $comment->setNbLikes(count($this->getLikes($comment)));
+                    $comment->setLikes($this->getLikes($comment));
                 }
             }
             return $results;
