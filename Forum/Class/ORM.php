@@ -166,5 +166,20 @@ class ORM {
             $query->bindParam('author', $author);
             $query->execute();
         }
+        else {
+            $query = $this->pdo->prepare("DELETE FROM likes WHERE author = :author AND comment = :comment)");
+            $query->bindParam('comment', $comment);
+            $query->bindParam('author', $author);
+            $query->execute();
+        }
+    }
+
+    function getLikeByAuthorAndComment(Int $author, Int $comment) {
+        $query = $this->pdo->prepare("SELECT * FROM likes WHERE author = :author AND comment = :comment");
+        $query->bindParam('comment', $comment);
+        $query->bindParam('author', $author);
+        $query->execute();
+        $query->setFetchMode(PDO::FETCH_CLASS, 'Entities\User');
+        return $query->fetch();
     }
 }

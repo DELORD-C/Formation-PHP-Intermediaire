@@ -6,8 +6,8 @@ class Renderer {
 
     function __construct(ORM $orm)
     {
-        $this->htmlGenerator = new HTMLGenerator();
         $this->orm = $orm;
+        $this->htmlGenerator = new HTMLGenerator($orm);
     }
 
     function render (String $templateName): Void
