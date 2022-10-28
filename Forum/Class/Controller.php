@@ -42,7 +42,17 @@ class Controller {
     function post (): Void
     {
         $this->auth->redirectUnlessLoggedIn();
-        $this->renderer->render('post');
+
+        if (isset($_GET['id']) && '' != $_GET['id']) {
+            if (isset($_POST['comment']) && '' != $_POST['comment']) {
+                $this->orm->newComment($_POST['comment'], $_SESSION['loggedIn'], $_GET['id']);
+            }
+            $this->renderer->render('post');
+        }
+        else {
+            header('location: index.php');
+        }
+
     }
 
     function logout (): Void

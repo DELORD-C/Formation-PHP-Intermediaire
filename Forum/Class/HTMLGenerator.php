@@ -33,4 +33,14 @@ class HTMLGenerator {
         </tr>
         ';
     }
+
+    function comments (Array $comments): String
+    {
+        $finalString = '<ul>';
+        foreach ($comments as $comment) {
+            $finalString .= '<li>' . $comment->getAuthor()->getEmail() . ' : ' . $comment->getContent() . '</li>';
+        }
+        $finalString .= '</ul>';
+        return $finalString;
+    }
 }

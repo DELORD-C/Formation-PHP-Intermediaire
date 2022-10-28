@@ -27,13 +27,18 @@ class Renderer {
                 $template = str_replace('{{POSTS}}', $html, $template);
                 break;
             case 'post':
+                //Récupération du post
                 $post = $this->orm->getPost($_GET['id']);
-                
                 $post->setTopic($this->orm->getTopicById($post->getTopic()));
                 $post->setAuthor($this->orm->getUserById($post->getAuthor()));
                 $html = $this->htmlGenerator->post($post);
                 $template = str_replace('{{TOPICNAME}}', $post->getTopic()->getName(), $template);
                 $template = str_replace('{{POST}}', $html, $template);
+
+                //Récupération des commentaires
+                $comments = $this->orm->getComments($post);
+                $html = $this->htmlGenerator->comments($comments);
+                $template = str_replace('{{COMMENTS}}', $html, $template);
                 break;
             default:
                 break;

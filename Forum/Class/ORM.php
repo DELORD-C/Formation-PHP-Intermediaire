@@ -63,11 +63,6 @@ class ORM {
         return $query->fetch();
     }
 
-    function getComments (): Array
-    {
-        return $this->comments; 
-    }
-
     function getUserByEmailAndPassword(String $email, String $password)
     {
         $query = $this->pdo->prepare("SELECT id FROM users WHERE email = :email AND password = :password");
@@ -109,5 +104,43 @@ class ORM {
         $query->bindParam('name', $topicName);
         $query->execute();
         return $this->pdo->lastInsertId();
+    }
+
+    function newComment (String $content, $author, $post): Int
+    {
+        $query = $this->pdo->prepare("INSERT INTO comments (content, author, post) VALUES (:content, :author, :post)");
+        $query->bindParam('content', $content);
+        $query->bindParam('author', $author);
+        $query->bindParam('post', $post);
+        $query->execute();
+        return $this->pdo->lastInsertId();
+    }
+
+    function getComments (?Post $post)
+    {
+        if ($post) {
+            $query = $this->pdo->prepare("SELECT * FROM comments WHERE post = :post");
+            $idPost = $post->getId();
+            $query->bindParam('post', $idPost);
+            $query->execute();
+            $results = $query->fetchAll(PDO::FETCH_CLASS, 'Entities\Comment');
+            if ($results) {
+                foreach ($results as $comment) {
+                    $comment->setAuthor($this->getUserById($comment->getAuthor()));
+                }
+            }
+            return $results;
+        }
+        else {
+            $query = $this->pdo->prepare("SELECT * FROM comments");
+            $query->execute();
+            $results = $query->fetchAll(PDO::FETCH_CLASS, 'Entities\Comment');
+            if ($results) {
+                foreach ($results as $comment) {
+                    $comment->setAuthor($this->getUserById($comment->getAuthor()));
+                }
+            }
+            return $results;
+        }
     }
 }
