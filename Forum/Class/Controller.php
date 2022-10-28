@@ -47,7 +47,9 @@ class Controller {
             if (isset($_POST['comment']) && '' != $_POST['comment']) {
                 $this->orm->newComment($_POST['comment'], $_SESSION['loggedIn'], $_GET['id']);
             }
-            //Check post like
+            if (isset($_POST['likeComment']) && '' != $_POST['likeComment']) {
+                $this->orm->newLike($_POST['likeComment'], $_SESSION['loggedIn']);
+            }
             $this->renderer->render('post');
         }
         else {

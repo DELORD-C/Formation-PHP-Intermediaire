@@ -127,6 +127,7 @@ class ORM {
             if ($results) {
                 foreach ($results as $comment) {
                     $comment->setAuthor($this->getUserById($comment->getAuthor()));
+                    $comment->setNbLikes(count($this->getLikes($comment)));
                 }
             }
             return $results;
@@ -141,6 +142,29 @@ class ORM {
                 }
             }
             return $results;
+        }
+    }
+
+    function getLikes(Comment $comment) {
+        $idComment = $comment->getId();
+        $query = $this->pdo->prepare("SELECT * FROM likes WHERE comment = :comment");
+        $query->bindParam('comment', $idComment);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_CLASS, 'Entities\Like');
+    }
+
+    function newLike($comment, $author) {
+        $query = $this->pdo->prepare("SELECT id FROM likes WHERE comment = :comment AND author = :author");
+        $query->bindParam('comment', $comment);
+        $query->bindParam('author', $author);
+        $query->execute();
+        $test = $query->fetch();
+
+        if (!$test) {
+            $query = $this->pdo->prepare("INSERT INTO likes (author, comment) VALUES (:author, :comment)");
+            $query->bindParam('comment', $comment);
+            $query->bindParam('author', $author);
+            $query->execute();
         }
     }
 }

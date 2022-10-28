@@ -13,3 +13,10 @@
      - (Nous allons avoir besoin de récupérer cette donnée)
 
 3. Un utilisateur ne peut liker un commentaire qu'une seule fois
+   - Condition lors de l'ajout (ORM) si existe déjà, alors on ajoute pas
+   
+
+4. Le bouton like doit changer si l'utilisateur a déjà liké le commentaire
+   - Le bouton pour dislike doit être fonctionnel
+     - Condition dans htmlGenerator pour afficher "like" si pas déjà liké, et "dislike" si déjà liké,
+     - Modifier méthode newLike dans l'orm pour supprimer si déjà existant
