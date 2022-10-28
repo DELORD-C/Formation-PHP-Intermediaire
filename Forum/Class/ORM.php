@@ -61,8 +61,8 @@ class ORM {
         $query->execute();
         $query->setFetchMode(PDO::FETCH_CLASS, 'Entities\Post');
         $post = $query->fetch();
-        $post->setTopic($this->orm->getTopicById($post->getTopic()));
-        $post->setAuthor($this->orm->getUserById($post->getAuthor()));
+        $post->setTopic($this->getTopicById($post->getTopic()));
+        $post->setAuthor($this->getUserById($post->getAuthor()));
         return $post;
     }
 
@@ -170,7 +170,7 @@ class ORM {
             $query->execute();
         }
         else {
-            $query = $this->pdo->prepare("DELETE FROM likes WHERE author = :author AND comment = :comment)");
+            $query = $this->pdo->prepare("DELETE FROM likes WHERE author = :author AND comment = :comment");
             $query->bindParam('comment', $comment);
             $query->bindParam('author', $author);
             $query->execute();
